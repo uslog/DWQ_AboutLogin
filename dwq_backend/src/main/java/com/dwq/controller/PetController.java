@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth/pets")
+@RequestMapping("/pets")
 @Tag(name = "宠物相关", description = "包括宠物添加、删除、修改、查询等操作。")
 public class PetController {
     private final PetService petService;
