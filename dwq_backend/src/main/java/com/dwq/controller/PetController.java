@@ -27,19 +27,25 @@ public class PetController {
        if(petService.addPet(pet))
        return RestBean.success();
        else
-       return RestBean.failure(300,"添加宠物失败");
+       return RestBean.failure(409,"添加宠物信息失败");
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除宠物操作")
-    public void deletePet(@PathVariable Integer id) {
-        petService.deletePet(id);
+    public RestBean<Void> deletePet(@PathVariable Integer id) {
+        if(petService.deletePet(id))
+            return RestBean.success();
+        else
+            return RestBean.failure(409,"删除宠物信息失败");
     }
 
     @PutMapping
     @Operation(summary = "修改宠物操作")
-    public void updatePet(@ModelAttribute Pet pet) {
-        petService.updatePet(pet);
+    public RestBean<Void> updatePet(@ModelAttribute Pet pet) {
+       if(petService.updatePet(pet))
+           return RestBean.success();
+       else
+           return RestBean.failure(409,"修改宠物信息失败");
     }
 
 
