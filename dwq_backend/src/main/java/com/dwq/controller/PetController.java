@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pets")
+@RequestMapping("/api/auth/pets")
 @Tag(name = "宠物相关", description = "包括宠物添加、删除、修改、查询等操作。")
 public class PetController {
     private final PetService petService;
@@ -24,10 +24,10 @@ public class PetController {
     @PostMapping
     @Operation(summary = "添加宠物操作")
     public RestBean<Void> addPet(@ModelAttribute Pet pet) {
-       if(petService.addPet(pet))
-       return RestBean.success();
-       else
-       return RestBean.failure(409,"添加宠物信息失败");
+        if(petService.addPet(pet))
+            return RestBean.success();
+        else
+            return RestBean.failure(409,"添加宠物信息失败");
     }
 
     @DeleteMapping("/{id}")
@@ -42,23 +42,23 @@ public class PetController {
     @PutMapping
     @Operation(summary = "修改宠物操作")
     public RestBean<Void> updatePet(@ModelAttribute Pet pet) {
-       if(petService.updatePet(pet))
-           return RestBean.success();
-       else
-           return RestBean.failure(409,"修改宠物信息失败");
+        if(petService.updatePet(pet))
+            return RestBean.success();
+        else
+            return RestBean.failure(409,"修改宠物信息失败");
     }
 
 
     @GetMapping("/{id}")
     @Operation(summary = "获取单个宠物")
-    public Pet getPet(@PathVariable Integer id) {
-        return petService.getPet(id);
+    public RestBean<Pet> getPet(@PathVariable Integer id) {
+       return  RestBean.success(petService.getPet(id));
     }
 
     @GetMapping
     @Operation(summary = "获取所有宠物")
-    public List<Pet> getAllPets() {
-        return petService.getAllPets();
+    public RestBean<List<Pet>> getAllPets() {
+        return RestBean.success(petService.getAllPets());
     }
 }
 
