@@ -20,11 +20,11 @@ public class PetService {
         return petMapper.insertPet(pet)!=0;
     }
 
-    public Boolean deletePet(Integer id) {
+    public boolean deletePet(Integer id) {
         return petMapper.deletePetById(id)!=0;
     }
 
-    public Boolean updatePet(Pet pet) {
+    public boolean updatePet(Pet pet) {
         return petMapper.updatePet(pet)!=0;
     }
 
